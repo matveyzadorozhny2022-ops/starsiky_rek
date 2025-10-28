@@ -89,7 +89,7 @@ html, body {
 /* ========== КНОПКА ПРОДАЖИ ========== */
 .sell-btn {
   margin-top: 20px;
-  padding: 18px 36px;
+  padding: 18px 130px;
   border-radius: 12px;
   background: linear-gradient(90deg, #FFD93D, #FFB300);
   border: none;
@@ -105,7 +105,7 @@ html, body {
   pointer-events: none;
 }
 .sell-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.10);
 }
 
 /* ========== КАНВАС ========== */
