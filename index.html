@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>STARSIKY — Gifts</title>
+
+  <!-- серьёзный читабельный шрифт -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <section class="stage">
+
+      <!-- центр: неоновый круг -->
+      <div id="neonCenter" class="neon-center" aria-hidden="true"></div>
+
+      <!-- Звезда -->
+      <button id="starBtn" class="star-btn" aria-label="Нажать на звезду">
+        <img id="starImg" class="star-img" src="assets/star.png" alt="star">
+        <span class="ripple" aria-hidden="true"></span>
+      </button>
+
+      <!-- Подарочная карточка (появляется в центре) -->
+      <div id="presentCard" class="present-card hidden" aria-hidden="true">
+        <div class="present-inner">
+          <img id="presentImg" class="present-img" src="presents/present1.jpeg" alt="present">
+          <div class="present-meta">
+            <div id="presentPrice" class="present-price">1000 ⭐</div>
+            <button id="sellBtn" class="sell-btn">Продать</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- confetti canvas -->
+      <canvas id="confetti" class="confetti"></canvas>
+
+      <!-- Центральное сообщение (продаже) -->
+      <div id="saleMessage" class="sale-message hidden" role="status" aria-live="polite">
+        <div class="sale-inner">⭐ Звёзды поступили на баланс ⭐</div>
+      </div>
+
+      <!-- счётчик снизу -->
+      <div class="bottom-panel">
+        <div id="counterWrap" class="counter-wrap">
+          <div class="counter-label">Нажато</div>
+          <div id="countDisplay" class="count-display"><span id="count">990</span><span class="sep"> / </span><span id="max">1000</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+:root{
+  --bg: #0D0F0E;
+  --neon-color: #FFD93D;    /* золотисто-жёлтый */
+  --neon-weak: rgba(255,217,61,0.12);
+  --accent: #FFD93D;
+  --accent-2: #FFB300;
+  --muted: #9aa2a6;
+  --text: #ffffff;
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;width:100%;background:var(--bg);font-family:var(--font);-webkit-font-smoothing:antialiased;color:var(--text);overflow:hidden}
+.app{height:100%;display:flex;align-items:center;justify-content:center}
+.stage{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+
+/* Neon center behind everything */
+.neon-center{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:840px;height:840px;border-radius:50%;
+  background:radial-gradient(circle at 50% 45%, rgba(255,220,80,0.36), rgba(255,180,20,0.04) 45%, transparent 70%);
+  filter:blur(72px) saturate(1.05);
+  z-index:0;pointer-events:none;opacity:0.96;
+}
+
+/* Star button centered */
+.star-btn{
+  background:transparent;border:0;padding:0;cursor:pointer;position:relative;z-index:10;touch-action:manipulation;
+  display:flex;align-items:center;justify-content:center;
+}
+.star-img{
+  width:420px;height:420px;object-fit:contain;border-radius:12px;filter: drop-shadow(0 40px 80px rgba(0,0,0,0.65));
+  transition: transform .36s cubic-bezier(.2,.9,.3,1), filter .22s, opacity .3s;
+}
+/* better tap visual */
+.star-btn:active .star-img{ transform: scale(.96) rotate(-6deg); filter: brightness(1.06); }
+
+/* ripple element */
+.ripple{ position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle, rgba(255,230,120,0.14), rgba(255,200,40,0.04));opacity:0;transform:scale(0);pointer-events:none;z-index:9}
+
+/* Star front glow */
+.star-front-glow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 50% 40%, rgba(255,220,80,0.36), transparent 55%);filter:blur(28px);z-index:8;pointer-events:none;opacity:0.95}
+
+/* Present card (center) */
+.present-card{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-60%) scale(.96);opacity:0;width:86%;max-width:520px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));border-radius:18px;padding:16px;box-shadow:0 30px 100px rgba(0,0,0,0.6);z-index:90;transition:all .48s cubic-bezier(.2,.9,.3,1);pointer-events:none;
+}
+.present-card.visible{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
+.present-inner{display:flex;flex-direction:column;align-items:center;gap:12px}
+.present-img{width:340px;height:340px;object-fit:cover;border-radius:14px;box-shadow:0 28px 90px rgba(0,0,0,0.6)}
+.present-meta{text-align:center}
+.present-price{font-weight:800;color:var(--accent);font-size:20px;margin-top:6px}
+
+/* Sell button: wide, beautiful, glowing */
+.sell-btn{
+  min-width:260px;
+  padding:16px 32px;border-radius:14px;border:0;font-weight:900;font-size:18px;color:#110700;cursor:pointer;
+  background:linear-gradient(90deg,var(--accent), var(--accent-2));
+  box-shadow:0 22px 80px rgba(255,190,40,0.26), 0 0 28px rgba(255,210,60,0.06);
+  transition: transform .16s ease, filter .2s, box-shadow .28s;
+}
+.sell-btn:active{transform:translateY(3px) scale(.995)}
+.sell-btn.anim-color{ animation: sellColor 900ms forwards; }
+@keyframes sellColor{
+  0% { filter:brightness(1); box-shadow:0 22px 80px rgba(255,190,40,0.26);}
+  40% { filter:brightness(1.2); box-shadow:0 30px 120px rgba(255,200,45,0.44);}
+  100% { filter:brightness(1); box-shadow:0 22px 80px rgba(255,190,40,0.26); }
+}
+
+/* confetti canvas overlay */
+.confetti{ position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:85 }
+
+/* Sale message */
+.sale-message{ position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.88);z-index:200;opacity:0;pointer-events:none;transition:all .45s cubic-bezier(.2,.9,.3,1) }
+.sale-message.visible{opacity:1;transform:translate(-50%,-50%) scale(1);animation:popSale .9s cubic-bezier(.2,.9,.3,1) forwards}
+.sale-inner{font-weight:900;color:var(--accent);font-size:28px;text-shadow:0 0 40px rgba(255,210,60,0.9)}
+
+/* bottom counter */
+.bottom-panel{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:95;pointer-events:none}
+.counter-wrap{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));padding:12px 20px;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.5);display:flex;flex-direction:column;align-items:center;gap:6px;backdrop-filter: blur(6px)}
+.counter-label{font-size:12px;color:var(--muted);letter-spacing:1px}
+.count-display{font-weight:900;font-size:22px;color:var(--accent);text-shadow:0 14px 40px rgba(255,200,40,0.12)}
+
+/* small animations */
+@keyframes popSale { 0%{transform:translate(-50%,-50%) scale(.3);opacity:0} 70%{transform:translate(-50%,-50%) scale(1.08);opacity:1} 100%{transform:translate(-50%,-50%) scale(1)} }
+.pulse{animation:pulseAnim .5s cubic-bezier(.2,.9,.3,1)} @keyframes pulseAnim{0%{transform:scale(1)}40%{transform:scale(1.06)}70%{transform:scale(.98)}100%{transform:scale(1)}}
+
+/* responsive */
+@media (max-width:460px){
+  .star-img{width:320px;height:320px}
+  .present-img{width:260px;height:260px}
+  .sell-btn{min-width:220px;padding:14px 22px;font-size:16px}
+  .count-display{font-size:18px}
+  .sale-inner{font-size:20px}
+}
