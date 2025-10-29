@@ -1,142 +1,19 @@
-/* ========== ОСНОВА ========== */
-:root {
-  --bg: #0D0F0E;
-  --accent: #FFD93D;
-  --text: #fff;
-  --font: "Inter", system-ui;
-}
+/* styles.css */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+#stage{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+#bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(0.3px)}
+#ui{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:20px}
+.tap-button{width:220px;height:124px;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,0.4);cursor:pointer;transition:transform 220ms cubic-bezier(.22,.9,.28,1),opacity 300ms}
+.tap-button:active{transform:scale(0.95)}
+.gift-canvas{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0.9);width:60vw;max-width:900px;height:auto;pointer-events:none;opacity:0;transition:opacity 400ms,transform 600ms}
+#message{position:absolute;left:50%;top:20%;transform:translateX(-50%);font-size:48px;font-weight:800;color:#fff;text-shadow:0 6px 30px rgba(0,0,0,0.6);letter-spacing:2px;opacity:0;transition:opacity 400ms,transform 500ms}
+#message.show{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+#message.hidden{display:none}
 
-html, body {
-  height: 100%;
-  margin: 0;
-  background: var(--bg);
-  font-family: var(--font);
-  overflow: hidden;
-}
+/* Эффекты «взрыва» — простой масштаб + blur */
+.explode{animation:explodeAnim 520ms forwards}
+@keyframes explodeAnim{0%{transform:scale(1) rotate(0deg);opacity:1}60%{transform:scale(2.6) rotate(12deg);filter:blur(0)}100%{transform:scale(0.01) rotate(80deg);opacity:0}}
 
-.app, .stage {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* ========== НЕОН ========== */
-.neon-center {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 800px;
-  height: 800px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,220,80,0.25), transparent 70%);
-  filter: blur(60px);
-  pointer-events: none;
-  will-change: transform, opacity;
-  z-index: 0;
-}
-
-/* ========== ЗВЕЗДА ========== */
-.star-btn {
-  border: none;
-  background: none;
-  cursor: pointer;
-  z-index: 2;
-}
-.star-img {
-  width: 400px;
-  height: 400px;
-  transition: transform 0.6s ease, opacity 0.4s ease;
-  will-change: transform, opacity;
-}
-.star-btn:active .star-img {
-  transform: scale(0.95) rotate(-6deg);
-}
-
-/* ========== ПОДАРОК ========== */
-.present-card {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -60%) scale(0.9);
-  opacity: 0;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  pointer-events: none;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
-}
-.present-card.visible {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-  pointer-events: auto;
-}
-.present-img {
-  width: 340px;
-  height: 340px;
-  object-fit: cover;
-  border-radius: 14px;
-  background: transparent;
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
-  filter: none !important;
-  transition: transform 0.5s ease;
-}
-
-/* ========== КНОПКА ПРОДАЖИ ========== */
-.sell-btn {
-  margin-top: 20px;
-  padding: 18px 130px;
-  border-radius: 12px;
-  background: linear-gradient(90deg, #FFD93D, #FFB300);
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  color: #111;
-  font-size: 18px;
-  transition: transform 0.3s ease, opacity 0.6s ease;
-  will-change: transform, opacity;
-}
-.sell-btn.transparent {
-  opacity: 0;
-  pointer-events: none;
-}
-.sell-btn:hover {
-  transform: scale(1.10);
-}
-
-/* ========== КАНВАС ========== */
-.confetti {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* ========== СООБЩЕНИЕ ========== */
-.sale-message {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  text-align: center;
-  color: var(--accent);
-  font-weight: 900;
-  font-size: 28px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-}
-.sale-message.visible {
-  opacity: 1;
-}
-.profit-large {
-  color: #fff;
-  font-size: 24px;
-  margin-top: 10px;
-}
+/* Адаптив */
+@media (max-width:600px){.tap-button{width:160px;height:90px;border-radius:18px}.#message{font-size:28px}}
