@@ -1,54 +1,31 @@
+<!-- index.html -->
 <!doctype html>
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-  <title>STARSIKY — Gifts</title>
-
-  <!-- серьёзный читабельный шрифт -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Тапалка</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="app">
-    <section class="stage">
+  <div id="stage">
+    <img id="bg" src="fon.jpg" alt="фон"/>
 
-      <!-- центр: неоновый круг -->
-      <div id="neonCenter" class="neon-center" aria-hidden="true"></div>
+    <div id="ui">
+      <!-- Canvas для кнопки (видео с хромакеем) -->
+      <canvas id="buttonCanvas" class="tap-button" width="480" height="270" role="button" tabindex="0" aria-label="Кнопка тап" ></canvas>
 
-      <!-- Звезда -->
-      <button id="starBtn" class="star-btn" aria-label="Нажать на звезду">
-        <!-- теперь картинка звезды лежит в той же папке, что и код: star.png -->
-        <img id="starImg" class="star-img" src="star.png" alt="star">
-        <span class="ripple" aria-hidden="true"></span>
-      </button>
+      <!-- Canvas для подарка -->
+      <canvas id="giftCanvas" class="gift-canvas" width="720" height="405"></canvas>
 
-      <!-- Подарочная карточка (появляется в центре) -->
-      <div id="presentCard" class="present-card hidden" aria-hidden="true">
-        <div class="present-inner">
-          <!-- теперь все картинки подарков лежат в корне и называются present1.jpeg, present2.jpeg и т.д. -->
-          <img id="presentImg" class="present-img" src="present1.jpeg" alt="present">
-          <div class="present-meta">
-            <div id="presentPrice" class="present-price">1000 ⭐</div>
-            <button id="sellBtn" class="sell-btn transparent">
-              <span class="sell-label">Продать</span>
-            </button>
-          </div>
-        </div>
-      </div>
+      <div id="message" class="hidden">ПОЗДРАВЛЯЕМ!</div>
 
-      <!-- particles canvas (звёздочки) -->
-      <canvas id="confetti" class="confetti"></canvas>
+      <!-- Скрытые теги video — источники, рисуем их в canvas с хромакеем -->
+      <video id="buttonVideo" src="button/btn1.mp4" muted playsinline loop crossorigin="anonymous" style="display:none"></video>
 
-      <!-- Центральное сообщение (продаже) -->
-      <div id="saleMessage" class="sale-message hidden" role="status" aria-live="polite">
-        <div id="saleInner" class="sale-inner">⭐ Звёзды поступили на баланс ⭐</div>
-      </div>
-
-      <!-- Примечание: нижний счётчик удалён по просьбе -->
-    </section>
-  </main>
+      <!-- gift video элемент создаётся динамически -->
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
